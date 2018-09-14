@@ -1,5 +1,5 @@
 class RedactorRails::PicturesController < ApplicationController
-  before_filter :redactor_authenticate_user!
+  before_action :redactor_authenticate_user!
 
   def index
     @pictures = RedactorRails.picture_model.where(
@@ -18,7 +18,7 @@ class RedactorRails::PicturesController < ApplicationController
     end
 
     if @picture.save
-      render json: { filelink: @picture.url(:content) }
+      render json: { :filelink => @picture.url }
     else
       render json: { error: @picture.errors }
     end
